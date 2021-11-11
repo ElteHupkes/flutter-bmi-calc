@@ -10,6 +10,12 @@ void main() => runApp(BMICalculator());
 class BMICalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ios = Theme.of(context).platform == TargetPlatform.iOS;
+    final whiteTyp =
+        ios ? Typography.whiteCupertino : Typography.whiteMountainView;
+    final blackTyp =
+        ios ? Typography.blackCupertino : Typography.blackMountainView;
+
     final baseDarkTheme = ThemeData.from(
       colorScheme: ColorScheme.dark(
         primary: primaryColor,
@@ -17,7 +23,7 @@ class BMICalculator extends StatelessWidget {
         background: baseColor,
         surface: containerColor,
       ),
-      textTheme: Typography.whiteMountainView.apply(
+      textTheme: whiteTyp.apply(
         displayColor: Colors.white70,
         bodyColor: Colors.white,
       ),
@@ -37,7 +43,7 @@ class BMICalculator extends StatelessWidget {
         primary: primaryColor,
         surface: Colors.black.withOpacity(0.05),
       ),
-      textTheme: Typography.blackMountainView,
+      textTheme: blackTyp,
     );
     final lightTheme = baseLightTheme.copyWith(
       appBarTheme: baseLightTheme.appBarTheme.copyWith(

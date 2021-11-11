@@ -110,38 +110,16 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+  void _updateGender(bool isMale) {
+    setState(() => _male = isMale);
+  }
+
   /// Creates the male / female button widgets
   Widget _cardButton(BuildContext context, bool male) {
-    final selectedColor = Colors.white.withOpacity(0.1);
-    final isActive = _male == male;
-    final text = male ? 'MALE' : 'FEMALE';
-    final icon = male ? Icons.male : Icons.female;
-    final theme = Theme.of(context);
-    var onPrimary = isActive
-        ? theme.textTheme.bodyText1!.color
-        : theme.textTheme.caption!.color;
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.all(0),
-          primary: isActive ? selectedColor : Colors.transparent,
-          onPrimary: onPrimary,
-          elevation: 0),
-      onPressed: () => setState(() => _male = male),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 72,
-            color: onPrimary,
-          ),
-          SizedBox(height: 8),
-          Text(
-            text,
-            style: TextStyle(fontSize: 18),
-          ),
-        ],
-      ),
+    return CardButton(
+      currentMale: _male,
+      male: male,
+      update: _updateGender,
     );
   }
 
@@ -214,6 +192,56 @@ class _InputPageState extends State<InputPage> {
         size: 36,
       ),
       onPressed: onPressed,
+    );
+  }
+}
+
+/// Card Male / Female button widget
+class CardButton extends StatelessWidget {
+  final bool currentMale;
+  final bool male;
+  final Function(bool) update;
+
+  const CardButton({
+    Key? key,
+    required this.currentMale,
+    required this.male,
+    required this.update,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final selectedColor = theme.colorScheme.onBackground.withOpacity(0.1);
+    final isActive = currentMale == male;
+    final text = male ? 'MALE' : 'FEMALE';
+    final icon = male ? Icons.male : Icons.female;
+    var onPrimary = isActive
+        ? theme.textTheme.bodyText1!.color
+        : theme.textTheme.caption!.color;
+
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(0),
+          primary: isActive ? selectedColor : Colors.transparent,
+          onPrimary: onPrimary,
+          elevation: 0),
+      onPressed: () => update(male),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 72,
+            color: onPrimary,
+          ),
+          SizedBox(height: 8),
+          Text(
+            text,
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
     );
   }
 }
