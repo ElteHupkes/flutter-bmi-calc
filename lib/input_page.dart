@@ -204,7 +204,7 @@ class _InputPageState extends State<InputPage> {
   Widget _pmButton(BuildContext context, bool add, VoidCallback onPressed) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: Colors.white.withOpacity(0.2),
+          primary: Theme.of(context).dividerColor,
           onPrimary: getLabelStyle(context).color,
           shape: CircleBorder(),
           padding: EdgeInsets.all(8),

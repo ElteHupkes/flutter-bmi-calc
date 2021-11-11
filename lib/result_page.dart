@@ -41,6 +41,7 @@ class ResultPage extends StatelessWidget {
       appBar: AppBar(title: Text('BMI CALCULATOR')),
       body: Column(
         children: [
+          SizedBox(height: 24),
           Text(
             'Your Result',
             style: Theme.of(context).textTheme.headline3!.copyWith(
@@ -75,6 +76,7 @@ class ResultCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(36.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               cat.name,
