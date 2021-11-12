@@ -60,13 +60,12 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
                   children: [
                     ReusableCard(
-                        child: IncrDecr(
-                            label: 'WEIGHT (kg)',
-                            getter: (m) => m.weight,
-                            setter: (m, v) => m.setWeight(v))
-                        // child: _plusMinus(
-                        //     context, 'WEIGHT (kg)', _weight, _updateWeight),
-                        ),
+                      child: IncrDecr(
+                        label: 'WEIGHT (kg)',
+                        getter: (m) => m.weight,
+                        setter: (m, v) => m.setWeight(v),
+                      ),
+                    ),
                     ReusableCard(
                       child: IncrDecr(
                           label: 'AGE',
@@ -127,7 +126,7 @@ class IncrDecr extends StatelessWidget {
                 incrDecrButton(context, model, false),
                 incrDecrButton(context, model, true),
               ],
-            )
+            ),
           ],
         );
       },
@@ -141,7 +140,7 @@ class IncrDecr extends StatelessWidget {
         primary: Theme.of(context).dividerColor,
         onPrimary: InputPage.getLabelStyle(context).color,
         shape: CircleBorder(),
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         elevation: 0,
       ),
       child: Icon(
@@ -218,7 +217,7 @@ class CardButton extends StatelessWidget {
 
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             primary: isActive ? selectedColor : Colors.transparent,
             onPrimary: onPrimary,
             elevation: 0),
