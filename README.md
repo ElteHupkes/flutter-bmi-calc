@@ -6,7 +6,7 @@ course. One of the lessons involves creating a BMI calculator based on
 [this design](https://dribbble.com/shots/4585382-Simple-BMI-Calculator). Rather than
 going through the lesson I figured I'd give it a shot from scratch (I did clone
 the original repo, but there wasn't much there) to see how much I understand so far. It also
-gives me a chance to do some unopinionated (this is a word now) Googling, because the course
+gives me a chance to do some unopinionated Googling with regards to best practices, because the course
 appears to be quite outdated in some respects.
 
 What I ended up with is, I suspect, quite different from what the course is doing (I'm returning to
