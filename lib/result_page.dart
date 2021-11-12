@@ -1,6 +1,8 @@
 import 'package:bmi_calculator/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
+import 'model/bmi_data.dart';
+
 class ResultCategory {
   final double minRange;
   final double maxRange;
@@ -24,18 +26,14 @@ final resultCategories = [
 ];
 
 class ResultPage extends StatelessWidget {
-  final int height;
-  final int weight;
-  final int age;
+  final BMIData model;
 
-  const ResultPage(
-      {Key? key, required this.height, required this.weight, required this.age})
-      : super(key: key);
+  const ResultPage({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final hm = height / 100.0;
-    final bmi = weight.toDouble() / (hm * hm);
+    final hm = model.height / 100.0;
+    final bmi = model.weight.toDouble() / (hm * hm);
 
     return Scaffold(
       appBar: AppBar(title: Text('BMI CALCULATOR')),

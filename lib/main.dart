@@ -57,7 +57,6 @@ class BMICalculator extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
       home: InputPage(),
-      // home: ResultPage(height: 170, weight: 80, age: 23),
     );
   }
 }
