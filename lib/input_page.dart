@@ -182,7 +182,7 @@ class HeightSelector extends StatelessWidget {
             ),
             Slider(
               value: model.height.toDouble(),
-              onChanged: (v) => model.setHeight(v.toInt()),
+              onChanged: (v) => model.setHeight(v.round()),
               min: BMIData.MIN_HEIGHT.toDouble(),
               max: BMIData.MAX_HEIGHT.toDouble(),
             )
