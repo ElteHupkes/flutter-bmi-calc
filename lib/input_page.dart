@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'tap_hold_button.dart';
 import 'model/bmi_data.dart';
 
 class InputPage extends StatefulWidget {
@@ -124,40 +125,16 @@ class IncrDecr extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RoundIconButton(onPressed: decrement, icon: Icons.remove),
-              RoundIconButton(onPressed: increment, icon: Icons.add),
+              TapOrHoldButton(onUpdate: decrement, icon: Icons.remove),
+              SizedBox(
+                width: 8,
+              ),
+              TapOrHoldButton(onUpdate: increment, icon: Icons.add),
             ],
           ),
         ],
       );
     });
-  }
-}
-
-/// Simple round button with an icon
-class RoundIconButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final IconData icon;
-
-  const RoundIconButton({Key? key, required this.onPressed, required this.icon})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).dividerColor,
-        onPrimary: InputPage.getLabelStyle(context).color,
-        shape: CircleBorder(),
-        padding: const EdgeInsets.all(8),
-        elevation: 0,
-      ),
-      child: Icon(
-        icon,
-        size: 36,
-      ),
-      onPressed: onPressed,
-    );
   }
 }
 

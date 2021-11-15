@@ -12,10 +12,15 @@ appears to be quite outdated in some respects.
 What I ended up with is, I suspect, quite different from what the course is doing (I'm returning to
 it after finishing this README).
 - I'm using [provider](https://pub.dev/packages/provider) since it appears to be an important pattern
-    in Flutter, and I wanted to try it out.
+  in Flutter, and I wanted to try it out. Some of the `Consumer`s are inside of extracted widgets,
+  which made the code cleaner in this case, but is probably not great if you'd want to user those widgets
+  for something else.
 - No local color definitions, everything is themed. It was really quite a mess to figure out how
     to do that correctly, and I'm not sure I'm all the way there. To some extend it 
   [probably just is kind of a mess](https://docs.google.com/document/d/1kzIOQN4QYfVsc5lMZgy_A-FWGXBAJBMySGqZqsJytcE/edit#).
+- For the weight / age controls, I implemented custom buttons that increment / decrement the
+  corresponding properties with increasing speed when held, so you can just press and hold to
+  rapidly change the property. Also see [my answer on StackOverflow](https://stackoverflow.com/a/69977924/358873).
 - Since I was theming anyway, I figured I'd add light / dark mode support (following the system setting). 
   Dark mode is the one in the supplied design, light mode uses something, well, light.
   
