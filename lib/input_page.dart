@@ -40,11 +40,11 @@ class _InputPageState extends State<InputPage> {
                   children: [
                     // "Male" selector button
                     ReusableCard(
-                      child: CardButton(gender: Gender.male),
+                      child: GenderCardButton(gender: Gender.male),
                     ),
                     // "Female" selector button
                     ReusableCard(
-                      child: CardButton(gender: Gender.female),
+                      child: GenderCardButton(gender: Gender.female),
                     ),
                   ],
                 ),
@@ -98,43 +98,52 @@ class _InputPageState extends State<InputPage> {
 
 /// Widget to increment / decrement a single value
 class IncrDecr extends StatelessWidget {
-  final Function(BMIData, int) setter;
+  final void Function(BMIData, int) setter;
   final int Function(BMIData) getter;
   final String label;
 
   const IncrDecr(
       {Key? key,
-      required this.setter,
+      required this.label,
       required this.getter,
-      required this.label})
+      required this.setter})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<BMIData>(
-      builder: (context, model, child) {
-        final value = getter(model);
+    return Consumer<BMIData>(builder: (context, model, child) {
+      final value = getter(model);
+      final increment = () => setter(model, value + 1);
+      final decrement = () => setter(model, value - 1);
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(label, style: InputPage.getLabelStyle(context)),
-            Text('$value', style: InputPage.getValueStyle(context)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                incrDecrButton(context, model, false),
-                incrDecrButton(context, model, true),
-              ],
-            ),
-          ],
-        );
-      },
-    );
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(label, style: InputPage.getLabelStyle(context)),
+          Text('$value', style: InputPage.getValueStyle(context)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RoundIconButton(onPressed: decrement, icon: Icons.remove),
+              RoundIconButton(onPressed: increment, icon: Icons.add),
+            ],
+          ),
+        ],
+      );
+    });
   }
+}
 
-  /// Creates a single plus or minus button
-  Widget incrDecrButton(BuildContext context, BMIData model, bool add) {
+/// Simple round button with an icon
+class RoundIconButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final IconData icon;
+
+  const RoundIconButton({Key? key, required this.onPressed, required this.icon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         primary: Theme.of(context).dividerColor,
@@ -144,10 +153,10 @@ class IncrDecr extends StatelessWidget {
         elevation: 0,
       ),
       child: Icon(
-        add ? Icons.add : Icons.remove,
+        icon,
         size: 36,
       ),
-      onPressed: () => setter(model, getter(model) + (add ? 1 : -1)),
+      onPressed: onPressed,
     );
   }
 }
@@ -194,10 +203,10 @@ class HeightSelector extends StatelessWidget {
 }
 
 /// Card Male / Female button widget
-class CardButton extends StatelessWidget {
+class GenderCardButton extends StatelessWidget {
   final Gender gender;
 
-  const CardButton({
+  const GenderCardButton({
     Key? key,
     required this.gender,
   }) : super(key: key);
