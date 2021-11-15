@@ -4,8 +4,9 @@ fooling around I decided to do AppBrewery's
 [Complete 2021 Flutter Development Bootcamp with Dart](https://www.appbrewery.co/p/flutter-development-bootcamp-with-dart)
 course. One of the lessons involves creating a BMI calculator based on
 [this design](https://dribbble.com/shots/4585382-Simple-BMI-Calculator). Rather than
-going through the lesson I figured I'd give it a shot from scratch (I did clone
-the original repo, but there wasn't much there) to see how much I understand so far. It also
+going through the lesson I figured I'd give it a shot from scratch to see how much I understand so far. I did clone the
+original project, or rather the [one migrated by tigerjoy](https://github.com/tigerjoy/bmi-calculator-flutter)
+(thanks, by the way!), but there isn't much there. It also
 gives me a chance to do some unopinionated Googling with regards to best practices, because the course
 appears to be quite outdated in some respects.
 
@@ -28,3 +29,5 @@ Some other notes:
 - The male / female and age controls, while functional, don't change anything in the result.
   I did go through the effort of putting the default BMI health ranges in, but anything beyond
   that is really not the point of this exercise.
+
+I might update this app as I go along as it provides a nice canvas for playing around with Flutter.
