@@ -24,6 +24,7 @@ it after finishing this README).
   rapidly change the property. Also see [my answer on StackOverflow](https://stackoverflow.com/a/69977924/358873).
 - Since I was theming anyway, I figured I'd add light / dark mode support (following the system setting). 
   Dark mode is the one in the supplied design, light mode uses something, well, light.
+- I'm using named routes for navigation, which is entirely superfluous here, but again I was curious.
   
 Some other notes:
 - The male / female and age controls, while functional, don't change anything in the result.
