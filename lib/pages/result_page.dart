@@ -1,29 +1,7 @@
-import 'package:bmi_calculator/shared_widgets.dart';
+import 'package:bmi_calculator/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
-import 'model/bmi_data.dart';
-
-class ResultCategory {
-  final double minRange;
-  final double maxRange;
-  final Color color;
-  final String name;
-
-  const ResultCategory(this.minRange, this.maxRange, this.color, this.name);
-  bool inRange(double bmi) => bmi >= minRange && bmi < maxRange;
-}
-
-final resultCategories = [
-  ResultCategory(
-      double.negativeInfinity, 16.0, Colors.red[900]!, 'SEVERELY UNDERWEIGHT'),
-  ResultCategory(16.0, 17, Colors.red[700]!, 'MODERATELY UNDERWEIGHT'),
-  ResultCategory(16.0, 18.5, Colors.orange[300]!, 'UNDERWEIGHT'),
-  ResultCategory(18.5, 25, Colors.green, 'NORMAL'),
-  ResultCategory(25.0, 30, Colors.orange[300]!, 'OVERWEIGHT'),
-  ResultCategory(30, 35, Colors.red[400]!, 'CLASS 1 OBESE'),
-  ResultCategory(35, 40, Colors.red[700]!, 'CLASS 2 OBESE'),
-  ResultCategory(40, double.infinity, Colors.red[900]!, 'CLASS 3 OBESE'),
-];
+import '../model/bmi_data.dart';
 
 class ResultPage extends StatelessWidget {
   final BMIData model;
@@ -32,9 +10,6 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hm = model.height / 100.0;
-    final bmi = model.weight.toDouble() / (hm * hm);
-
     return Scaffold(
       appBar: AppBar(title: Text('BMI CALCULATOR')),
       body: Column(
@@ -43,11 +18,12 @@ class ResultPage extends StatelessWidget {
           Text(
             'Your Result',
             style: Theme.of(context).textTheme.headline3!.copyWith(
-                color: Theme.of(context).textTheme.bodyText1!.color,
-                fontWeight: FontWeight.bold),
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           ReusableCard(
-            child: ResultCard(bmi: bmi),
+            child: ResultCard(bmiData: model.bmi),
           ),
           BottomButton(
             onPressed: () => Navigator.pop(context),
@@ -60,14 +36,14 @@ class ResultPage extends StatelessWidget {
 }
 
 class ResultCard extends StatelessWidget {
-  final double bmi;
+  final BMIData bmiData;
 
-  const ResultCard({Key? key, required this.bmi}) : super(key: key);
+  const ResultCard({Key? key, required this.bmiData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
-    var cat = resultCategories.firstWhere((c) => c.inRange(bmi));
+    var cat = bmiData.category;
 
     return Container(
       width: double.infinity,
@@ -87,7 +63,7 @@ class ResultCard extends StatelessWidget {
               height: 16,
             ),
             Text(
-              bmi.toStringAsFixed(1),
+              bmiData.bmi.toStringAsFixed(1),
               style: TextStyle(
                 fontSize: 96,
                 fontWeight: FontWeight.bold,

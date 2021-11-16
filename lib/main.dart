@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'input_page.dart';
+import 'pages/input_page.dart';
 
 const baseColor = Color(0xff0a0e21);
 const containerColor = Color(0xff1d1e33);

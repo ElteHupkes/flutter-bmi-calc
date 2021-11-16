@@ -1,11 +1,11 @@
-import 'package:bmi_calculator/result_page.dart';
-import 'package:bmi_calculator/shared_widgets.dart';
+import 'package:bmi_calculator/pages/result_page.dart';
+import 'package:bmi_calculator/widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'tap_hold_button.dart';
-import 'model/bmi_data.dart';
+import '../widgets/tap_hold_button.dart';
+import '../model/bmi_data.dart';
 
 class InputPage extends StatefulWidget {
   /// Returns entry label style

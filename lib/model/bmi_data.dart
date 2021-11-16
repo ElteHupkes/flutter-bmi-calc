@@ -1,4 +1,29 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+class ResultCategory {
+  final double minRange;
+  final double maxRange;
+  final Color color;
+  final String name;
+
+  const ResultCategory(this.minRange, this.maxRange, this.color, this.name);
+  bool inRange(double bmi) => bmi >= minRange && bmi < maxRange;
+}
+
+final resultCategories = [
+  ResultCategory(
+      double.negativeInfinity, 16.0, Colors.red[900]!, 'SEVERELY UNDERWEIGHT'),
+  ResultCategory(16.0, 17, Colors.red[700]!, 'MODERATELY UNDERWEIGHT'),
+  ResultCategory(16.0, 18.5, Colors.orange[300]!, 'UNDERWEIGHT'),
+  ResultCategory(18.5, 25, Colors.green, 'NORMAL'),
+  ResultCategory(25.0, 30, Colors.orange[300]!, 'OVERWEIGHT'),
+  ResultCategory(30, 35, Colors.red[400]!, 'CLASS 1 OBESE'),
+  ResultCategory(35, 40, Colors.red[700]!, 'CLASS 2 OBESE'),
+  ResultCategory(40, double.infinity, Colors.red[900]!, 'CLASS 3 OBESE'),
+];
 
 class BMIData with ChangeNotifier {
   static const MAX_AGE = 140;
@@ -31,6 +56,15 @@ class BMIData with ChangeNotifier {
   void n(VoidCallback v) {
     v();
     notifyListeners();
+  }
+
+  /// Returns the calculated BMI
+  double get bmi => weight.toDouble() / pow(height, 2);
+
+  /// Returns the BMI result category
+  ResultCategory get category {
+    var b = bmi;
+    return resultCategories.firstWhere((c) => c.inRange(b));
   }
 }
 
