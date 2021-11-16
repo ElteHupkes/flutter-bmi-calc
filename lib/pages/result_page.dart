@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import '../model/bmi_data.dart';
 
 class ResultPage extends StatelessWidget {
-  final BMIData model;
+  /// Route name
+  static const String routeName = '/results';
 
-  const ResultPage({Key? key, required this.model}) : super(key: key);
+  const ResultPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final model = ModalRoute.of(context)!.settings.arguments as BMIData;
+
     return Scaffold(
       appBar: AppBar(title: Text('BMI CALCULATOR')),
       body: Column(
@@ -23,7 +26,7 @@ class ResultPage extends StatelessWidget {
                 ),
           ),
           ReusableCard(
-            child: ResultCard(bmiData: model.bmi),
+            child: ResultCard(bmiData: model),
           ),
           BottomButton(
             onPressed: () => Navigator.pop(context),

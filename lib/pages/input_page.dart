@@ -8,6 +8,9 @@ import '../widgets/tap_hold_button.dart';
 import '../model/bmi_data.dart';
 
 class InputPage extends StatefulWidget {
+  /// Route name
+  static const String routeName = '/';
+
   /// Returns entry label style
   static TextStyle getLabelStyle(BuildContext context) {
     return Theme.of(context).textTheme.caption!.copyWith(
@@ -79,13 +82,10 @@ class _InputPageState extends State<InputPage> {
               BottomButton(
                 text: 'CALCULATE YOUR BMI',
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    new MaterialPageRoute(
-                      builder: (ctx) => ResultPage(
-                        model: Provider.of<BMIData>(context, listen: false),
-                      ),
-                    ),
+                    ResultPage.routeName,
+                    arguments: Provider.of<BMIData>(context, listen: false),
                   );
                 },
               )

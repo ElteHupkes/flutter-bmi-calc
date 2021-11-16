@@ -59,7 +59,7 @@ class BMIData with ChangeNotifier {
   }
 
   /// Returns the calculated BMI
-  double get bmi => weight.toDouble() / pow(height, 2);
+  double get bmi => weight / pow(height / 100.0, 2);
 
   /// Returns the BMI result category
   ResultCategory get category {
